@@ -76,13 +76,13 @@ public class Camera {
      */
     public byte[] sendCommand(CameraCommand command) {
         byte[] dataBlock = command.getCommandDataBlock();
-        ByteBuffer sendBuffer = ByteBuffer.allocate(dataBlock.length);
+        ByteBuffer sendBuffer = ByteBuffer.allocateDirect(dataBlock.length);
         sendBuffer.put(dataBlock);
         this.IUsbController.bulkTransfer(this.cameraHandle, (byte)0x01, sendBuffer, 0);
         int expectedReplyLength = command.getExpectedReplySize();
 
         if(expectedReplyLength > 0) {
-            ByteBuffer receiveBuffer = ByteBuffer.allocate(expectedReplyLength);
+            ByteBuffer receiveBuffer = ByteBuffer.allocateDirect(expectedReplyLength);
             int received = this.IUsbController.bulkTransfer(this.cameraHandle, (byte)0x82, receiveBuffer, 0);
 
             if(received != expectedReplyLength) {
