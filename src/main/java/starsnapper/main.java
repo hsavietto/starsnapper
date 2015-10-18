@@ -7,13 +7,15 @@ import starsnapper.commands.Reset;
 import starsnapper.usb.IUsbController;
 import starsnapper.usb.UsbController;
 
+import java.io.IOException;
+
 /**
  * @author Helder Savietto (helder.savietto@gmail.com)
  * @date 03/09/2015
  */
 public class main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         IUsbController controller = new UsbController();
         Camera camera = new Camera(controller);
         camera.initCommunications();

@@ -1,5 +1,8 @@
 package starsnapper.commands;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+
 /**
  * @author Helder Savietto (helder.savietto@gmail.com)
  * @date 11/10/2015.
@@ -17,7 +20,13 @@ public abstract class CameraReply {
     }
 
     protected short getShort(int offset) {
-        return (short)(((this.receivedData[offset + 1] & 0xFF) << 8) | (this.receivedData[offset] & 0xFF));
+        ByteBuffer bb = ByteBuffer.allocate(4);
+        bb.order(ByteOrder.LITTLE_ENDIAN);
+        bb.put(receivedData[offset]);
+        bb.put(receivedData[offset + 1]);
+        bb.put((byte)0);
+        bb.put((byte)0);
+        return (short)(bb.getInt(0));
     }
 
     public abstract byte getCommandCode();
