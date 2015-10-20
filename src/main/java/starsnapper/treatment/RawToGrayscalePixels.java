@@ -13,7 +13,6 @@ public class RawToGrayscalePixels {
 
     protected int width;
     protected int height;
-    protected boolean interlaced;
     protected int bytesPerPixel;
 
     /**
@@ -22,13 +21,11 @@ public class RawToGrayscalePixels {
      * @param width the width of the image in pixels
      * @param height the height of the image in pixels
      * @param bytesPerPixel number of bytes per pixel (not bits!)
-     * @param interlaced whether the image in interlaced or not
      */
-    public RawToGrayscalePixels(int width, int height, int bytesPerPixel, boolean interlaced) {
+    public RawToGrayscalePixels(int width, int height, int bytesPerPixel) {
         this.width = width;
         this.height = height;
         this.bytesPerPixel = bytesPerPixel;
-        this.interlaced = interlaced;
     }
 
     /**
@@ -43,7 +40,7 @@ public class RawToGrayscalePixels {
         bb.order(ByteOrder.LITTLE_ENDIAN);
 
         for(int row = 0; row < this.height; row++) {
-            int lineStart = this.width * bytesPerPixel * (this.interlaced ? (row + (row % 2 * this.height)) / 2 : row);
+            int lineStart = this.width * bytesPerPixel * row;
             int targetStart = row * this.width;
 
             for(int column = 0; column < this.width; column++) {
@@ -58,6 +55,42 @@ public class RawToGrayscalePixels {
                 }
 
                 pixels[targetStart + column] = bb.getInt(0);
+            }
+        }
+
+        return pixels;
+    }
+
+    /**
+     *
+     * @param raw
+     * @return
+     */
+    public int[] convertRawInterlacedToGrayscalePixels(byte[][] raw) {
+        int numberOfFields = raw.length;
+        int[] pixels = new int[this.width * this.height * numberOfFields];
+        ByteBuffer bb = ByteBuffer.allocate(4);
+        bb.order(ByteOrder.LITTLE_ENDIAN);
+
+        for(int row = 0; row < this.height; row++) {
+            int lineStart = row * this.width * bytesPerPixel;
+
+            for(int field = 0; field < numberOfFields; field++) {
+                int targetStart = (row * numberOfFields + field) * this.width;
+
+                for (int column = 0; column < this.width; column++) {
+                    bb.clear();
+
+                    for (int i = 0; i < bytesPerPixel; i++) {
+                        bb.put(raw[field][lineStart + column * bytesPerPixel + i]);
+                    }
+
+                    for (int i = 0; i < (4 - bytesPerPixel); i++) {
+                        bb.put((byte) 0);
+                    }
+
+                    pixels[targetStart + column] = bb.getInt(0);
+                }
             }
         }
 

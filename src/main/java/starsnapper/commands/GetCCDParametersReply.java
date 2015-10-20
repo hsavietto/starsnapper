@@ -6,11 +6,6 @@ package starsnapper.commands;
  */
 public class GetCCDParametersReply extends CameraReply {
 
-    @Override
-    public byte getCommandCode() {
-        return 0x08;
-    }
-
     public byte getHorizontalFrontPorch() {
         // offset 0
         return getByte(0);

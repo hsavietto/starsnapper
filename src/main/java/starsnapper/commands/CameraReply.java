@@ -28,6 +28,4 @@ public abstract class CameraReply {
         bb.put((byte)0);
         return (short)(bb.getInt(0));
     }
-
-    public abstract byte getCommandCode();
 }

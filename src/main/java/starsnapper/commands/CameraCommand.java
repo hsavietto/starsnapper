@@ -97,8 +97,8 @@ public abstract class CameraCommand {
      *
      * @return the byte with the consolidated flags
      */
-    protected byte getFlagsValue() {
-        byte value = 0;
+    protected short getFlagsValue() {
+        short value = 0;
 
         for(Iterator<CommandFlags> it = this.flags.iterator(); it.hasNext(); ) {
             value |= it.next().value;
@@ -125,6 +125,30 @@ public abstract class CameraCommand {
      */
     protected byte getHighValue(short value) {
         return (byte)((value >> 8) & 0xff);
+    }
+
+    /**
+     *
+     * @param buffer
+     * @param offset
+     * @param value
+     */
+    protected void setShortValue(byte[] buffer, int offset, short value) {
+        buffer[offset] = (byte)(value & 0xff);
+        buffer[offset + 1] = (byte)((value >> 8) & 0xff);
+    }
+
+    /**
+     *
+     * @param buffer
+     * @param offset
+     * @param value
+     */
+    protected void setLongValue(byte[] buffer, int offset, long value) {
+        buffer[offset] = (byte)(value & 0xff);
+        buffer[offset + 1] = (byte)((value >> 8) & 0xff);
+        buffer[offset + 2] = (byte)((value >> 16) & 0xff);
+        buffer[offset + 3] = (byte)((value >> 24) & 0xff);
     }
 
     /**

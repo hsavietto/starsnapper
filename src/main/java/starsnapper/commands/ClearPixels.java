@@ -2,17 +2,17 @@ package starsnapper.commands;
 
 /**
  * @author Helder Savietto (helder.savietto@gmail.com)
- * @date 05/09/2015
+ * @date 19/10/2015.
  */
-public class ReadPixelsDelayed extends CameraCommand {
+public class ClearPixels extends CameraCommand {
     @Override
     protected byte getCommandType() {
-        return (byte)0xC0;
+        return 0x40;
     }
 
     @Override
     protected byte getCommandCode() {
-        return 2;
+        return 0x01;
     }
 
     @Override
@@ -27,12 +27,12 @@ public class ReadPixelsDelayed extends CameraCommand {
 
     @Override
     protected short getCommandLength() {
-        return 14;
+        return 0;
     }
 
     @Override
     protected byte[] getCommandTransportData() {
-        return new byte[] { 0, 0, 0, 0, (byte)100, 0, (byte)100, 0,  1, 1, 50, 0, 0, 0 };
+        return new byte[0];
     }
 
     @Override

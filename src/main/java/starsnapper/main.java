@@ -1,13 +1,15 @@
 package starsnapper;
 
 import starsnapper.camera.Camera;
-import starsnapper.commands.GetCCDParameters;
-import starsnapper.commands.GetCCDParametersReply;
-import starsnapper.commands.Reset;
+import starsnapper.commands.*;
+import starsnapper.treatment.GrayscalePngGenerator;
+import starsnapper.treatment.RawToGrayscalePixels;
 import starsnapper.usb.IUsbController;
 import starsnapper.usb.UsbController;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * @author Helder Savietto (helder.savietto@gmail.com)
@@ -15,7 +17,7 @@ import java.io.IOException;
  */
 public class main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         IUsbController controller = new UsbController();
         Camera camera = new Camera(controller);
         camera.initCommunications();
@@ -35,5 +37,35 @@ public class main {
         System.out.println("Bits per pixel = " + ccdParameters.bitsPerPixel());
         System.out.println("Number of serial ports = " + ccdParameters.getNumberSerialPorts());
         System.out.println("Extra capabilities = " + ccdParameters.getExtraCapabilities());
+
+        short width = ccdParameters.getWidth();
+        short height = ccdParameters.getHeight();
+
+        // clear the pixels and start the acquiring
+        camera.sendCommand(new ClearPixels());
+        Thread.sleep(450);
+
+        byte[][] rawData = new byte[2][];
+
+        // obtain even field
+        ReadPixels readEvenFieldCommand = new ReadPixels(width, height);
+        readEvenFieldCommand.setFlag(CommandFlags.CCD_FLAGS_FIELD_EVEN);
+        ReadPixelsReply readEvenReply = new ReadPixelsReply();
+        readEvenReply.setData(camera.sendCommand(readEvenFieldCommand));
+        rawData[0] = readEvenReply.getRawImage();
+
+        // obtain odd field
+        ReadPixels readOddFieldCommand = new ReadPixels(width, height);
+        readOddFieldCommand.setFlag(CommandFlags.CCD_FLAGS_FIELD_ODD);
+        ReadPixelsReply readOddReply = new ReadPixelsReply();
+        readOddReply.setData(camera.sendCommand(readOddFieldCommand));
+        rawData[1] = readEvenReply.getRawImage();
+
+        RawToGrayscalePixels pixelsGenerator = new RawToGrayscalePixels(width, height, 2);
+        int[] pixels = pixelsGenerator.convertRawInterlacedToGrayscalePixels(rawData);
+        GrayscalePngGenerator pngGenerator = new GrayscalePngGenerator(width, height * 2, 16);
+        OutputStream out = new FileOutputStream("c:\\temp\\camera.png");
+        pngGenerator.writePixelsToStream(pixels, out);
+        out.close();
     }
 }
