@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b4b56f0-aa46-4bd0-be5c-7f3cc21ad54e" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Helder\IdeaProjects\StarSnapper\src\main\java\starsnapper\commands\ReadPixelsDelayed.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/starsnapper/commands/CameraCommand.java" afterPath="$PROJECT_DIR$/src/main/java/starsnapper/commands/CameraCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/starsnapper/commands/CameraReply.java" afterPath="$PROJECT_DIR$/src/main/java/starsnapper/commands/CameraReply.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/starsnapper/commands/GetCCDParametersReply.java" afterPath="$PROJECT_DIR$/src/main/java/starsnapper/commands/GetCCDParametersReply.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/starsnapper/treatment/RawToGrayscalePixels.java" afterPath="$PROJECT_DIR$/src/main/java/starsnapper/treatment/RawToGrayscalePixels.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/starsnapper/treatment/RawToGrayscalePixelsTest.java" afterPath="$PROJECT_DIR$/src/test/java/starsnapper/treatment/RawToGrayscalePixelsTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/starsnapper/main.java" afterPath="$PROJECT_DIR$/src/main/java/starsnapper/main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -35,10 +29,12 @@
       <file leaf-file-name="main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/starsnapper/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5236427">
-              <caret line="61" column="17" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.5831874">
+              <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#3160#3917#0" expanded="true" />
+                <element signature="e#3916#3917#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -58,7 +54,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/starsnapper/camera/Camera.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+              <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -69,7 +65,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="48" column="54" selection-start-line="48" selection-start-column="54" selection-end-line="48" selection-end-column="54" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -123,9 +121,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="25" column="11" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="11" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -200,7 +196,6 @@
         <option value="$PROJECT_DIR$/src/main/java/starsnapper/usb/UsbController.java" />
         <option value="$PROJECT_DIR$/src/main/java/starsnapper/usb/IUsbController.java" />
         <option value="$PROJECT_DIR$/src/main/java/starsnapper/commands/GetCCDParameters.java" />
-        <option value="$PROJECT_DIR$/src/main/java/starsnapper/camera/Camera.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/starsnapper/treatment/RawToData.java" />
         <option value="$PROJECT_DIR$/src/test/java/starsnapper/treatment/PgnGeneratorTest.java" />
@@ -218,6 +213,7 @@
         <option value="$PROJECT_DIR$/src/main/java/starsnapper/commands/ReadPixelsDelayed.java" />
         <option value="$PROJECT_DIR$/src/test/java/starsnapper/treatment/RawToGrayscalePixelsTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/starsnapper/treatment/RawToGrayscalePixels.java" />
+        <option value="$PROJECT_DIR$/src/main/java/starsnapper/camera/Camera.java" />
         <option value="$PROJECT_DIR$/src/main/java/starsnapper/main.java" />
       </list>
     </option>
@@ -973,13 +969,13 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.4978678" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32516703" sideWeight="0.26812366" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32516703" sideWeight="0.2595949" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33296213" sideWeight="0.5618337" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33296213" sideWeight="0.57569295" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18070363" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33296213" sideWeight="0.43816632" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33296213" sideWeight="0.42430705" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18763326" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1023,14 +1019,8 @@
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/starsnapper/main.java</url>
-          <line>40</line>
-          <properties />
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/starsnapper/camera/Camera.java</url>
-          <line>77</line>
+          <line>72</line>
           <properties />
           <option name="timeStamp" value="39" />
         </line-breakpoint>
@@ -1058,6 +1048,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#3160#3917#0" expanded="true" />
+            <element signature="e#3916#3917#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1125,6 +1117,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#3160#3917#0" expanded="true" />
+            <element signature="e#3916#3917#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1405,7 +1399,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="48" column="54" selection-start-line="48" selection-start-column="54" selection-end-line="48" selection-end-column="54" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1428,9 +1424,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="25" column="11" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1461,14 +1455,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/starsnapper/camera/Camera.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/starsnapper/treatment/RawToGrayscalePixels.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1479,12 +1465,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/starsnapper/camera/Camera.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/starsnapper/main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5236427">
-          <caret line="61" column="17" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.5831874">
+          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#3160#3917#0" expanded="true" />
+            <element signature="e#3916#3917#0" expanded="true" />
           </folding>
         </state>
       </provider>

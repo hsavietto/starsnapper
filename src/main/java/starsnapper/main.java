@@ -38,34 +38,55 @@ public class main {
         System.out.println("Number of serial ports = " + ccdParameters.getNumberSerialPorts());
         System.out.println("Extra capabilities = " + ccdParameters.getExtraCapabilities());
 
-        short width = ccdParameters.getWidth();
-        short height = ccdParameters.getHeight();
+        final short width = ccdParameters.getWidth();
+        final short height = ccdParameters.getHeight();
 
-        // clear the pixels and start the acquiring
-        camera.sendCommand(new ClearPixels());
-        Thread.sleep(450);
+        long start = System.currentTimeMillis();
+        long totalSleeping = 0;
+        long totalSaving = 0;
 
-        byte[][] rawData = new byte[2][];
+        for(int i = 0; i < 20; i++) {
+            // clear the pixels and start the acquiring
+            camera.sendCommand(new ClearPixels());
+            Thread.sleep(500);
 
-        // obtain even field
-        ReadPixels readEvenFieldCommand = new ReadPixels(width, height);
-        readEvenFieldCommand.setFlag(CommandFlags.CCD_FLAGS_FIELD_EVEN);
-        ReadPixelsReply readEvenReply = new ReadPixelsReply();
-        readEvenReply.setData(camera.sendCommand(readEvenFieldCommand));
-        rawData[0] = readEvenReply.getRawImage();
+            // obtain even field
+            ReadPixels readEvenFieldCommand = new ReadPixels(width, height);
+            readEvenFieldCommand.setFlag(CommandFlags.CCD_FLAGS_FIELD_EVEN);
+            ReadPixelsReply readEvenReply = new ReadPixelsReply();
+            readEvenReply.setData(camera.sendCommand(readEvenFieldCommand));
 
-        // obtain odd field
-        ReadPixels readOddFieldCommand = new ReadPixels(width, height);
-        readOddFieldCommand.setFlag(CommandFlags.CCD_FLAGS_FIELD_ODD);
-        ReadPixelsReply readOddReply = new ReadPixelsReply();
-        readOddReply.setData(camera.sendCommand(readOddFieldCommand));
-        rawData[1] = readEvenReply.getRawImage();
+            // obtain odd field
+            ReadPixels readOddFieldCommand = new ReadPixels(width, height);
+            readOddFieldCommand.setFlag(CommandFlags.CCD_FLAGS_FIELD_ODD);
+            ReadPixelsReply readOddReply = new ReadPixelsReply();
+            readOddReply.setData(camera.sendCommand(readOddFieldCommand));
 
-        RawToGrayscalePixels pixelsGenerator = new RawToGrayscalePixels(width, height, 2);
-        int[] pixels = pixelsGenerator.convertRawInterlacedToGrayscalePixels(rawData);
-        GrayscalePngGenerator pngGenerator = new GrayscalePngGenerator(width, height * 2, 16);
-        OutputStream out = new FileOutputStream("c:\\temp\\camera.png");
-        pngGenerator.writePixelsToStream(pixels, out);
-        out.close();
+            final byte[][] rawData = new byte[][] { readEvenReply.getRawImage(), readEvenReply.getRawImage() };
+            final int counter = i;
+
+            Thread savingThread = new Thread(new Runnable() {
+                public void run() {
+                    try {
+                        RawToGrayscalePixels pixelsGenerator = new RawToGrayscalePixels(width, height, 2);
+                        int[] pixels = pixelsGenerator.convertRawInterlacedToGrayscalePixels(rawData);
+                        GrayscalePngGenerator pngGenerator = new GrayscalePngGenerator(width, height * 2, 16);
+                        OutputStream out = new FileOutputStream("c:\\temp\\camera_" + counter + ".png");
+                        pngGenerator.writePixelsToStream(pixels, out);
+                        out.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            savingThread.start();
+        }
+
+        long end = System.currentTimeMillis();
+        long elapsed = end - start;
+        System.out.println("Elapsed time: " + elapsed + " ms");
+        System.out.println("Sleeping time: " + totalSleeping + " ms");
+        System.out.println("Saving time: " + totalSaving + " ms");
     }
 }
