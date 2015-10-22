@@ -92,6 +92,10 @@ public abstract class CameraCommand {
         this.flags.remove(flag);
     }
 
+    public boolean hasFlag(CommandFlags flag) {
+        return this.flags.contains(flag);
+    }
+
     /**
      * Gets the flags as bits in a byte
      *

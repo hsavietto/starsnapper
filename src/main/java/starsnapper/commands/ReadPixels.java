@@ -56,7 +56,11 @@ public class ReadPixels extends CameraCommand {
         this.setShortValue(data, 0, this.xOffset);
         this.setShortValue(data, 2, this.yOffset);
         this.setShortValue(data, 4, this.width);
-        this.setShortValue(data, 6, this.height);
+
+        int numberOfFields = (this.hasFlag(CommandFlags.CCD_FLAGS_FIELD_EVEN) ? 1 : 0) +
+                (this.hasFlag(CommandFlags.CCD_FLAGS_FIELD_ODD) ? 1 : 0);
+
+        this.setShortValue(data, 6, (short)(this.height * numberOfFields));
         data[8] = 1;
         data[9] = 1;
         return data;
@@ -64,6 +68,9 @@ public class ReadPixels extends CameraCommand {
 
     @Override
     public int getExpectedReplySize() {
-        return this.width * this.height * 2;
+        int numberOfFields = (this.hasFlag(CommandFlags.CCD_FLAGS_FIELD_EVEN) ? 1 : 0) +
+                        (this.hasFlag(CommandFlags.CCD_FLAGS_FIELD_ODD) ? 1 : 0);
+
+        return this.width * this.height * 2 * numberOfFields;
     }
 }

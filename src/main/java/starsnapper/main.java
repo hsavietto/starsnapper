@@ -1,8 +1,13 @@
 package starsnapper;
 
+import nom.tam.fits.Fits;
+import nom.tam.fits.FitsException;
+import nom.tam.fits.FitsFactory;
+import nom.tam.util.BufferedFile;
 import starsnapper.camera.Camera;
 import starsnapper.commands.*;
 import starsnapper.treatment.GrayscalePngGenerator;
+import starsnapper.treatment.RawToFloats;
 import starsnapper.treatment.RawToGrayscalePixels;
 import starsnapper.usb.IUsbController;
 import starsnapper.usb.UsbController;
@@ -62,16 +67,16 @@ public class main {
             ReadPixelsReply readOddReply = new ReadPixelsReply();
             readOddReply.setData(camera.sendCommand(readOddFieldCommand));
 
-            final byte[][] rawData = new byte[][] { readEvenReply.getRawImage(), readEvenReply.getRawImage() };
+            final byte[][] rawData = new byte[][] { readEvenReply.getRawImage(), readOddReply.getRawImage() };
             final int counter = i;
 
-            Thread savingThread = new Thread(new Runnable() {
+            Thread pngSavingThread = new Thread(new Runnable() {
                 public void run() {
                     try {
                         RawToGrayscalePixels pixelsGenerator = new RawToGrayscalePixels(width, height, 2);
                         int[] pixels = pixelsGenerator.convertRawInterlacedToGrayscalePixels(rawData);
                         GrayscalePngGenerator pngGenerator = new GrayscalePngGenerator(width, height * 2, 16);
-                        OutputStream out = new FileOutputStream("c:\\temp\\camera_" + counter + ".png");
+                        OutputStream out = new FileOutputStream("c:\\temp\\fits\\camera_" + counter + ".png");
                         pngGenerator.writePixelsToStream(pixels, out);
                         out.close();
                     } catch (IOException e) {
@@ -80,7 +85,27 @@ public class main {
                 }
             });
 
-            savingThread.start();
+            pngSavingThread.start();
+
+            Thread fitsSavingThread = new Thread(new Runnable() {
+                public void run() {
+                    try {
+                        RawToFloats floatsGenerator = new RawToFloats(width, height, 2);
+                        float[][] data = floatsGenerator.convertRawInterlacedToFloats(rawData);
+                        Fits fitsFile = new Fits();
+                        fitsFile.addHDU(FitsFactory.hduFactory(data));
+                        BufferedFile file = new BufferedFile("c:\\temp\\fits\\camera_" + counter + ".fits", "rw");
+                        fitsFile.write(file);
+                        file.close();
+                    } catch (FitsException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            fitsSavingThread.start();
         }
 
         long end = System.currentTimeMillis();

@@ -4,57 +4,56 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 /**
- * Class that converts raw data from the camera into values of grayscale pixels
+ * Class that converts raw data from the camera into a float matrix
  *
  * @author Helder Savietto (helder.savietto@gmail.com)
- * @date 17/10/2015.
+ * @date 22/10/2015.
  */
-public class RawToGrayscalePixels {
+public class RawToFloats {
 
     protected int width;
     protected int height;
-    protected int bytesPerPixel;
+    protected int bytesPerValue;
 
     /**
      * Constructor
      *
      * @param width the width of the image in pixels
      * @param height the height of the image in pixels
-     * @param bytesPerPixel number of bytes per pixel (not bits!)
+     * @param bytesPerValue number of bytes per value
      */
-    public RawToGrayscalePixels(int width, int height, int bytesPerPixel) {
+    public RawToFloats(int width, int height, int bytesPerValue) {
         this.width = width;
         this.height = height;
-        this.bytesPerPixel = bytesPerPixel;
+        this.bytesPerValue = bytesPerValue;
     }
 
     /**
-     * Converts the raw data into pixel values.
+     * Converts the raw data into float values
      *
      * @param raw the raw data from the camera
      * @return an array with the pixel values
      */
-    public int[] convertRawToGrayscalePixels(byte[] raw) {
-        int[] pixels = new int[this.width * this.height];
+    public float[][] convertRawToFloats(byte[] raw) {
+        float[][] pixels = new float[this.height * 2][this.width];
         ByteBuffer bb = ByteBuffer.allocate(4);
         bb.order(ByteOrder.LITTLE_ENDIAN);
 
         for(int row = 0; row < this.height; row++) {
-            int lineStart = this.width * bytesPerPixel * row;
-            int targetStart = row * this.width;
+            int lineStart = this.width * bytesPerValue * row;
 
             for(int column = 0; column < this.width; column++) {
                 bb.clear();
 
-                for(int i = 0; i < bytesPerPixel; i++) {
-                    bb.put(raw[lineStart + column * bytesPerPixel + i]);
+                for(int i = 0; i < bytesPerValue; i++) {
+                    bb.put(raw[lineStart + column * bytesPerValue + i]);
                 }
 
-                for(int i = 0; i < (4 - bytesPerPixel); i++) {
+                for(int i = 0; i < (4 - bytesPerValue); i++) {
                     bb.put((byte)0);
                 }
 
-                pixels[targetStart + column] = bb.getInt(0);
+                pixels[row][column] = (float)bb.getInt(0);
             }
         }
 
@@ -67,30 +66,28 @@ public class RawToGrayscalePixels {
      * @param raw the raw data from the camera
      * @return an array with the pixel values
      */
-    public int[] convertRawInterlacedToGrayscalePixels(byte[][] raw) {
+    public float[][] convertRawInterlacedToFloats(byte[][] raw) {
         int numberOfFields = raw.length;
-        int[] pixels = new int[this.width * this.height * numberOfFields];
+        float[][] pixels = new float[this.height * numberOfFields][this.width];
         ByteBuffer bb = ByteBuffer.allocate(4);
         bb.order(ByteOrder.LITTLE_ENDIAN);
 
         for(int row = 0; row < this.height; row++) {
-            int lineStart = row * this.width * bytesPerPixel;
+            int lineStart = row * this.width * bytesPerValue;
 
             for(int field = 0; field < numberOfFields; field++) {
-                int targetStart = (row * numberOfFields + field) * this.width;
-
                 for (int column = 0; column < this.width; column++) {
                     bb.clear();
 
-                    for (int i = 0; i < bytesPerPixel; i++) {
-                        bb.put(raw[field][lineStart + column * bytesPerPixel + i]);
+                    for (int i = 0; i < bytesPerValue; i++) {
+                        bb.put(raw[field][lineStart + column * bytesPerValue + i]);
                     }
 
-                    for (int i = 0; i < (4 - bytesPerPixel); i++) {
+                    for (int i = 0; i < (4 - bytesPerValue); i++) {
                         bb.put((byte) 0);
                     }
 
-                    pixels[targetStart + column] = bb.getInt(0);
+                    pixels[row * numberOfFields + field][column] = (float)bb.getInt(0);
                 }
             }
         }
