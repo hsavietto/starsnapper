@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1b4b56f0-aa46-4bd0-be5c-7f3cc21ad54e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/starsnapper/camera/Camera.java" afterPath="$PROJECT_DIR$/src/main/java/starsnapper/camera/Camera.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/starsnapper/treatment/RawToGrayscalePixels.java" afterPath="$PROJECT_DIR$/src/main/java/starsnapper/treatment/RawToGrayscalePixels.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/starsnapper/treatment/RawToGrayscalePixelsTest.java" afterPath="$PROJECT_DIR$/src/test/java/starsnapper/treatment/RawToGrayscalePixelsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StarSnapper.iml" afterPath="$PROJECT_DIR$/StarSnapper.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/starsnapper/usb/UsbController.java" afterPath="$PROJECT_DIR$/src/main/java/starsnapper/usb/UsbController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/starsnapper/main.java" afterPath="$PROJECT_DIR$/src/main/java/starsnapper/main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="1b4b56f0-aa46-4bd0-be5c-7f3cc21ad54e" name="Default" comment="" />
     <ignored path="StarSnapper.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -985,12 +975,6 @@
           <line>60</line>
           <properties />
           <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/starsnapper/main.java</url>
-          <line>35</line>
-          <properties />
-          <option name="timeStamp" value="48" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="50" />
