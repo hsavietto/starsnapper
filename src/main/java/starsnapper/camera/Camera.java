@@ -66,7 +66,7 @@ public class Camera {
 
         this.cameraHandle = this.IUsbController.createDeviceHandle();
         this.IUsbController.open(this.cameraDevice, this.cameraHandle);
-        this.IUsbController.claimInterface(this.cameraHandle, 0);
+        this.IUsbController.claimInterface(this.cameraHandle, 1);
     }
 
     /**

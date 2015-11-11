@@ -73,25 +73,23 @@ public class RawToGrayscalePixels {
         ByteBuffer bb = ByteBuffer.allocate(4);
         bb.order(ByteOrder.LITTLE_ENDIAN);
 
-        for(int row = 0; row < this.height; row++) {
-            int lineStart = row * this.width * bytesPerPixel;
+        for(int row = 0; row < this.height * numberOfFields; row++) {
+            int lineStart = (int)(row / numberOfFields) * this.width * bytesPerPixel;
+            int field = row % numberOfFields;
+            int targetStart = row * this.width;
 
-            for(int field = 0; field < numberOfFields; field++) {
-                int targetStart = (row * numberOfFields + field) * this.width;
+            for (int column = 0; column < this.width; column++) {
+                bb.clear();
 
-                for (int column = 0; column < this.width; column++) {
-                    bb.clear();
-
-                    for (int i = 0; i < bytesPerPixel; i++) {
-                        bb.put(raw[field][lineStart + column * bytesPerPixel + i]);
-                    }
-
-                    for (int i = 0; i < (4 - bytesPerPixel); i++) {
-                        bb.put((byte) 0);
-                    }
-
-                    pixels[targetStart + column] = bb.getInt(0);
+                for (int i = 0; i < bytesPerPixel; i++) {
+                    bb.put(raw[field][lineStart + column * bytesPerPixel + i]);
                 }
+
+                for (int i = 0; i < (4 - bytesPerPixel); i++) {
+                    bb.put((byte) 0);
+                }
+
+                pixels[targetStart + column] = bb.getInt(0);
             }
         }
 

@@ -102,7 +102,13 @@ public class UsbController implements IUsbController {
     }
 
     public void claimInterface(final IDeviceHandle handle, final int iface) {
-        int result = LibUsb.claimInterface(((DeviceHandleWrapper)handle).get(), iface);
+        int result = LibUsb.setConfiguration(((DeviceHandleWrapper)handle).get(), 1);
+
+        if(result != LibUsb.SUCCESS) {
+            throw new RuntimeException(new LibUsbException("Unable to set configuration", result));
+        }
+
+        result = LibUsb.claimInterface(((DeviceHandleWrapper)handle).get(), iface);
 
         if(result != LibUsb.SUCCESS) {
             throw new RuntimeException(new LibUsbException("Unable to claim interface", result));
