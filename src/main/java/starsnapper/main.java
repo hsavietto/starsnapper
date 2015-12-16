@@ -1,8 +1,6 @@
 package starsnapper;
 
-import nom.tam.fits.Fits;
-import nom.tam.fits.FitsException;
-import nom.tam.fits.FitsFactory;
+import nom.tam.fits.*;
 import nom.tam.util.BufferedFile;
 import org.apache.commons.cli.*;
 import starsnapper.camera.Camera;
@@ -14,6 +12,8 @@ import starsnapper.usb.IUsbController;
 import starsnapper.usb.UsbController;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author Helder Savietto (helder.savietto@gmail.com)
@@ -86,6 +86,7 @@ public class main {
         while(imageIndex != numberOfImages) {
             // clear the pixels and start the acquiring
             camera.sendCommand(new ClearPixels());
+            long startCapture = System.currentTimeMillis();
             Thread.sleep(expositionTime);
 
             // obtain even field
@@ -93,12 +94,20 @@ public class main {
             readEvenFieldCommand.setFlag(CommandFlags.CCD_FLAGS_FIELD_EVEN);
             ReadPixelsReply readEvenReply = new ReadPixelsReply();
             readEvenReply.setData(camera.sendCommand(readEvenFieldCommand));
+            long elapsedEvenField = System.currentTimeMillis() - startCapture;
 
             // obtain odd field
             ReadPixels readOddFieldCommand = new ReadPixels(width, height);
             readOddFieldCommand.setFlag(CommandFlags.CCD_FLAGS_FIELD_ODD);
             ReadPixelsReply readOddReply = new ReadPixelsReply();
             readOddReply.setData(camera.sendCommand(readOddFieldCommand));
+            long elapsedOddField = System.currentTimeMillis() - startCapture;
+            final double exposureTime = ((double)elapsedOddField + (double)elapsedEvenField) / 2000.0;
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss.SSS");
+            Date now = new Date();
+            final String dateEnd = dateFormat.format(now) + "T" + timeFormat.format(now);
 
             final byte[][] rawData = new byte[][] { readEvenReply.getRawImage(), readOddReply.getRawImage() };
             final int counter = imageIndex;
@@ -137,7 +146,11 @@ public class main {
                             RawToFloats floatsGenerator = new RawToFloats(width, height, 2);
                             float[][] data = floatsGenerator.convertRawInterlacedToFloats(rawData);
                             Fits fitsFile = new Fits();
-                            fitsFile.addHDU(FitsFactory.hduFactory(data));
+                            BasicHDU<?> dataHUD = FitsFactory.hduFactory(data);
+                            Header header = dataHUD.getHeader();
+                            header.addValue("EXPOSURE", exposureTime, "Exposure time (s)");
+                            header.addValue("DATE-END", dateEnd, "Observation timestamp");
+                            fitsFile.addHDU(dataHUD);
                             File file = new File(outputPath, fileName);
                             BufferedFile bufferedFile = new BufferedFile(file, "rw");
                             fitsFile.write(bufferedFile);
