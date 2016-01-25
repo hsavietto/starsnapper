@@ -8,7 +8,7 @@ import org.usb4java.DeviceHandle;
  */
 public class DeviceHandleWrapper implements IDeviceHandle {
 
-    private DeviceHandle deviceHandle;
+    private final DeviceHandle deviceHandle;
 
     /**
      *
@@ -18,11 +18,7 @@ public class DeviceHandleWrapper implements IDeviceHandle {
         this.deviceHandle = deviceHandle;
     }
 
-    /**
-     * Returns the native pointer to the device handle structure.
-     *
-     * @return The native pointer to the device handle structure.
-     */
+    @Override
     public long getPointer() {
         return this.deviceHandle.getPointer();
     }

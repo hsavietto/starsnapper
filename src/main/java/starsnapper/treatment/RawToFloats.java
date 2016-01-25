@@ -11,9 +11,9 @@ import java.nio.ByteOrder;
  */
 public class RawToFloats {
 
-    protected int width;
-    protected int height;
-    protected int bytesPerValue;
+    private final int width;
+    private final int height;
+    private final int bytesPerValue;
 
     /**
      * Constructor

@@ -36,7 +36,7 @@ public class UsbController implements IUsbController {
      * @return
      * @throws LibUsbException
      */
-    protected IDevice internalFindDevice(short vendorId, short productId) throws LibUsbException {
+    private IDevice internalFindDevice(short vendorId, short productId) throws LibUsbException {
         IDevice device = null;
         DeviceList list = new DeviceList();
         int result = LibUsb.getDeviceList(null, list);

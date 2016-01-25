@@ -12,9 +12,9 @@ import java.io.OutputStream;
  */
 public class GrayscalePngGenerator {
 
-    protected int width;
-    protected int height;
-    protected int bitsPerPixel;
+    private final int width;
+    private final int height;
+    private final int bitsPerPixel;
 
     /**
      * Constructor
@@ -37,20 +37,16 @@ public class GrayscalePngGenerator {
      */
     public void writePixelsToStream(int[] pixels, OutputStream stream) {
         ImageInfo info = new ImageInfo(this.width, this.height, this.bitsPerPixel, false, true, false);
-        PngWriter pngw = new PngWriter(stream, info);
+        PngWriter pngWriter = new PngWriter(stream, info);
         
         for(int row = 0; row < this.height; row++) {
             int[] lineData = new int[this.width];
             int lineStart = row * this.width;
-
-            for(int column = 0; column < this.width; column++) {
-                lineData[column] = pixels[lineStart + column];
-            }
-
+            System.arraycopy(pixels, lineStart, lineData, 0, this.width);
             ImageLineInt line = new ImageLineInt(info, lineData);
-            pngw.writeRow(line);
+            pngWriter.writeRow(line);
         }
 
-        pngw.close();
+        pngWriter.close();
     }
 }

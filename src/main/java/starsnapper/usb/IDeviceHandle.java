@@ -7,6 +7,11 @@ package starsnapper.usb;
  * @date 08/10/2015.
  */
 public interface IDeviceHandle {
+    /**
+     * Returns the native pointer to the device handle structure.
+     *
+     * @return The native pointer to the device handle structure.
+     */
     long getPointer();
 
     @Override

@@ -10,7 +10,7 @@ import org.usb4java.*;
  */
 public class DeviceWrapper implements IDevice {
 
-    private Device device;
+    private final Device device;
 
     public DeviceWrapper(Device device) {
         this.device = device;

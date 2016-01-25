@@ -11,9 +11,9 @@ import java.nio.ByteOrder;
  */
 public class RawToGrayscalePixels {
 
-    protected int width;
-    protected int height;
-    protected int bytesPerPixel;
+    private final int width;
+    private final int height;
+    private final int bytesPerPixel;
 
     /**
      * Constructor
@@ -74,7 +74,7 @@ public class RawToGrayscalePixels {
         bb.order(ByteOrder.LITTLE_ENDIAN);
 
         for(int row = 0; row < this.height * numberOfFields; row++) {
-            int lineStart = (int)(row / numberOfFields) * this.width * bytesPerPixel;
+            int lineStart = (row / numberOfFields) * this.width * bytesPerPixel;
             int field = row % numberOfFields;
             int targetStart = row * this.width;
 

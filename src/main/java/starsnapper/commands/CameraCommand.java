@@ -1,7 +1,6 @@
 package starsnapper.commands;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -10,7 +9,7 @@ import java.util.Set;
  */
 public abstract class CameraCommand {
 
-    protected Set<CommandFlags> flags;
+    private final Set<CommandFlags> flags;
 
     /**
      * Gets the command type
@@ -71,7 +70,7 @@ public abstract class CameraCommand {
      * Constructor
      */
     public CameraCommand() {
-        this.flags = new HashSet<CommandFlags>();
+        this.flags = new HashSet<>();
     }
 
     /**
@@ -104,8 +103,8 @@ public abstract class CameraCommand {
     protected short getFlagsValue() {
         short value = 0;
 
-        for(Iterator<CommandFlags> it = this.flags.iterator(); it.hasNext(); ) {
-            value |= it.next().value;
+        for (CommandFlags flag : this.flags) {
+            value |= flag.value;
         }
 
         return value;
@@ -117,7 +116,7 @@ public abstract class CameraCommand {
      * @param value the value
      * @return the lower byte
      */
-    protected byte getLowValue(short value) {
+    private byte getLowValue(short value) {
         return (byte)(value & 0xff);
     }
 
@@ -127,7 +126,7 @@ public abstract class CameraCommand {
      * @param value the value
      * @return the higher byte
      */
-    protected byte getHighValue(short value) {
+    private byte getHighValue(short value) {
         return (byte)((value >> 8) & 0xff);
     }
 
@@ -177,10 +176,7 @@ public abstract class CameraCommand {
 
         if(commandLength > 0) {
             byte[] commandParameters = this.getCommandTransportData();
-
-            for(short i = 0; i < commandLength; i++) {
-                block[i + 8] = commandParameters[i];
-            }
+            System.arraycopy(commandParameters, 0, block, 8, commandLength);
         }
 
         return block;

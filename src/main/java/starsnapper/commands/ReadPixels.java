@@ -6,10 +6,10 @@ package starsnapper.commands;
  */
 public class ReadPixels extends CameraCommand {
 
-    protected short xOffset;
-    protected short yOffset;
-    protected short width;
-    protected short height;
+    private final short xOffset;
+    private final short yOffset;
+    private final short width;
+    private final short height;
 
     public ReadPixels(short width, short height, short xOffset, short yOffset) {
         this.xOffset = xOffset;
