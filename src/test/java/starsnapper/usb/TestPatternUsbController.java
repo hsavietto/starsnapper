@@ -5,6 +5,7 @@ import starsnapper.commands.CommandFlags;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -27,6 +28,7 @@ public class TestPatternUsbController implements IUsbController {
         this.clock = clock;
         InputStream testPatternStream = getClass().getClassLoader().getResourceAsStream(resourceName);
         BufferedImage testPattern = ImageIO.read(testPatternStream);
+        DataBuffer db = testPattern.getRaster().getDataBuffer();
 
         int width = testPattern.getWidth();
         int height = testPattern.getHeight();
@@ -34,12 +36,8 @@ public class TestPatternUsbController implements IUsbController {
 
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
-                int rgb = testPattern.getRGB(col, row);
-                int b = (rgb & 0xff);
-                int g = ((rgb >> 8) & 0xff);
-                int r = ((rgb >> 16) & 0xff);
-                int grayscale = ((r * 2126 + g * 7152 + b * 722) * 0x100 / 10000);
-                testPatternPixels[row][col] = grayscale;
+                int grayscale = db.getElem(row * width + col) << 8;
+                testPatternPixels[row][col] = grayscale & 0xffff;
             }
         }
 

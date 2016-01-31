@@ -64,9 +64,10 @@ public class RawToFloats {
      * Converts the interlaced raw data into pixel values.
      *
      * @param raw the raw data from the camera
+     * @param normalization normalization of the fields
      * @return an array with the pixel values
      */
-    public float[][] convertRawInterlacedToFloats(byte[][] raw) {
+    public float[][] convertRawInterlacedToFloats(byte[][] raw, double[] normalization) {
         int numberOfFields = raw.length;
         float[][] pixels = new float[this.height * numberOfFields][this.width];
         ByteBuffer bb = ByteBuffer.allocate(4);
@@ -87,7 +88,7 @@ public class RawToFloats {
                         bb.put((byte) 0);
                     }
 
-                    pixels[row * numberOfFields + field][column] = (float)bb.getInt(0);
+                    pixels[row * numberOfFields + field][column] = (float)bb.getInt(0) * (float)normalization[field];
                 }
             }
         }

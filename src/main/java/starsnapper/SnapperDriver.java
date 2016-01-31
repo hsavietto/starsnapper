@@ -72,10 +72,10 @@ public class SnapperDriver {
             ReadPixelsReply readOddReply = new ReadPixelsReply();
             readOddReply.setData(camera.sendCommand(readOddFieldCommand));
             long elapsedOddField = clock.getTime() - startCapture;
-            final double exposureTime = ((double)elapsedOddField + (double)elapsedEvenField) / 2000.0;
+            final double exposureTime = (double)elapsedOddField / 1000.0;
 
             final byte[][] rawData = new byte[][] { readEvenReply.getRawImage(), readOddReply.getRawImage() };
-            final double[] normalization = { 1.0, 1.0 };
+            final double[] normalization = { 1.0, (double)elapsedOddField / (double)elapsedEvenField };
             final int counter = imageIndex;
 
             if(png) {
@@ -99,7 +99,7 @@ public class SnapperDriver {
                     public void run() {
                         try {
                             RawToFloats floatsGenerator = new RawToFloats(width, height, 2);
-                            float[][] data = floatsGenerator.convertRawInterlacedToFloats(rawData);
+                            float[][] data = floatsGenerator.convertRawInterlacedToFloats(rawData, normalization);
                             Fits fitsFile = new Fits();
                             BasicHDU<?> dataHUD = FitsFactory.hduFactory(data);
                             Header header = dataHUD.getHeader();

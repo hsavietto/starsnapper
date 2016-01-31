@@ -1,5 +1,7 @@
 package starsnapper.treatment;
 
+import nom.tam.fits.*;
+import nom.tam.util.BufferedFile;
 import org.junit.Test;
 import starsnapper.camera.Camera;
 import starsnapper.camera.ICamera;
@@ -20,7 +22,7 @@ import java.io.OutputStream;
 public class TestPatternCameraTest {
 
     @Test
-    public void testPatternGeneration() throws IOException, InterruptedException {
+    public void testPatternGeneration() throws IOException, InterruptedException, FitsException {
         long fullExposureMillis = 1000;
         MockClock clock = new MockClock();
         IUsbController controller = new TestPatternUsbController(clock, "test_pattern.png", fullExposureMillis);
@@ -54,10 +56,23 @@ public class TestPatternCameraTest {
         byte[][] rawData = new byte[][] { readEvenReply.getRawImage(), readOddReply.getRawImage() };
         double[] normalization = { (double)fullExposureMillis / (double)exposureTime, (double)fullExposureMillis / (double)(exposureTime + secondFieldDelay) };
 
-        final String fileName = "c:\\temp\\simulated_pattern.png";
-        File file = new File(fileName);
-        OutputStream out = new FileOutputStream(file);
-        PngSaver saver = new PngSaver(width, height, rawData, normalization, out);
-        saver.run();
+        final String pngFileName = "c:\\temp\\simulated_pattern.png";
+        File pngFile = new File(pngFileName);
+        OutputStream pngOut = new FileOutputStream(pngFile);
+        PngSaver pngSaver = new PngSaver(width, height, rawData, normalization, pngOut);
+        pngSaver.run();
+
+        final String fitsFileName = "c:\\temp\\simulated_pattern.fits";
+        RawToFloats floatsGenerator = new RawToFloats(width, height, 2);
+        float[][] data = floatsGenerator.convertRawInterlacedToFloats(rawData, normalization);
+        Fits fitsFile = new Fits();
+        BasicHDU<?> dataHUD = FitsFactory.hduFactory(data);
+        Header header = dataHUD.getHeader();
+        header.addValue("EXPOSURE", exposureTime, "Exposure time (s)");
+        fitsFile.addHDU(dataHUD);
+        File file = new File(fitsFileName);
+        BufferedFile bufferedFile = new BufferedFile(file, "rw");
+        fitsFile.write(bufferedFile);
+        bufferedFile.close();
     }
 }

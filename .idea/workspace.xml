@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b4b56f0-aa46-4bd0-be5c-7f3cc21ad54e" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Helder\IdeaProjects\StarSnapper\.idea\libraries\Maven__ar_com_hjg_pngj_2_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Helder\IdeaProjects\StarSnapper\src\test\resources\reference_image.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/starsnapper/treatment/GrayscalePgnGeneratorTest.java" afterPath="$PROJECT_DIR$/src/test/java/starsnapper/treatment/GrayscalePgnGeneratorTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/starsnapper/treatment/GrayscalePngGenerator.java" afterPath="$PROJECT_DIR$/src/main/java/starsnapper/treatment/GrayscalePngGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/starsnapper/usb/MockClock.java" afterPath="$PROJECT_DIR$/src/test/java/starsnapper/usb/MockClock.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StarSnapper.iml" afterPath="$PROJECT_DIR$/StarSnapper.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/starsnapper/treatment/RawToFloats.java" afterPath="$PROJECT_DIR$/src/main/java/starsnapper/treatment/RawToFloats.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/starsnapper/SnapperDriver.java" afterPath="$PROJECT_DIR$/src/main/java/starsnapper/SnapperDriver.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/starsnapper/treatment/TestPatternCameraTest.java" afterPath="$PROJECT_DIR$/src/test/java/starsnapper/treatment/TestPatternCameraTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/starsnapper/usb/TestPatternUsbController.java" afterPath="$PROJECT_DIR$/src/test/java/starsnapper/usb/TestPatternUsbController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="StarSnapper.iws" />
@@ -38,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/src/test/java/starsnapper/treatment/TestPatternCameraTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
+              <caret line="66" column="55" selection-start-line="66" selection-start-column="55" selection-end-line="66" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -46,13 +41,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestPatternUsbController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RawToFloats.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/starsnapper/treatment/RawToFloats.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="90" column="96" selection-start-line="90" selection-start-column="96" selection-end-line="90" selection-end-column="96" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestPatternUsbController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/starsnapper/usb/TestPatternUsbController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5860869">
-              <caret line="40" column="81" selection-start-line="40" selection-start-column="81" selection-end-line="40" selection-end-column="81" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="38" column="24" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2232#2233#0" expanded="true" />
+                <element signature="e#2259#2260#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -74,8 +81,10 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/starsnapper/treatment/GrayscalePngGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
+              <caret line="50" column="45" selection-start-line="50" selection-start-column="45" selection-end-line="50" selection-end-column="45" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,16 +109,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GrayscalePgnGeneratorTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/starsnapper/treatment/GrayscalePgnGeneratorTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ComparisonCriteria.java" pinned="false" current-in-tab="false">
         <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12-sources.jar!/org/junit/internal/ComparisonCriteria.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -128,6 +127,20 @@
               <folding>
                 <element signature="e#0#63910#0" expanded="true" />
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SnapperDriver.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/starsnapper/SnapperDriver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.0295652">
+              <caret line="73" column="45" selection-start-line="73" selection-start-column="45" selection-end-line="73" selection-end-column="45" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4182#5369#0" expanded="true" />
+                <element signature="e#5368#5369#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -186,7 +199,6 @@
         <option value="$PROJECT_DIR$/src/main/java/starsnapper/camera/PngSaver.java" />
         <option value="$PROJECT_DIR$/src/main/java/starsnapper/usb/UsbController.java" />
         <option value="$PROJECT_DIR$/src/main/java/starsnapper/camera/Camera.java" />
-        <option value="$PROJECT_DIR$/src/main/java/starsnapper/treatment/RawToFloats.java" />
         <option value="$PROJECT_DIR$/src/main/java/starsnapper/commands/ReadPixels.java" />
         <option value="$PROJECT_DIR$/src/main/java/starsnapper/usb/DeviceWrapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/starsnapper/main.java" />
@@ -197,15 +209,16 @@
         <option value="$PROJECT_DIR$/src/main/java/starsnapper/usb/Clock.java" />
         <option value="$PROJECT_DIR$/src/main/java/starsnapper/StarSnapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/starsnapper/treatment/PngSaver.java" />
-        <option value="$PROJECT_DIR$/src/main/java/starsnapper/SnapperDriver.java" />
         <option value="$PROJECT_DIR$/src/test/java/starsnapper/treatment/RawToGrayscalePixelsTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/starsnapper/usb/MockClock.java" />
-        <option value="$PROJECT_DIR$/src/test/java/starsnapper/treatment/TestPatternCameraTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/starsnapper/treatment/RawToGrayscalePixels.java" />
-        <option value="$PROJECT_DIR$/src/main/java/starsnapper/treatment/GrayscalePngGenerator.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/test/java/starsnapper/treatment/GrayscalePgnGeneratorTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/starsnapper/treatment/GrayscalePngGenerator.java" />
         <option value="$PROJECT_DIR$/src/test/java/starsnapper/usb/TestPatternUsbController.java" />
+        <option value="$PROJECT_DIR$/src/test/java/starsnapper/treatment/TestPatternCameraTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/starsnapper/treatment/RawToFloats.java" />
+        <option value="$PROJECT_DIR$/src/main/java/starsnapper/SnapperDriver.java" />
       </list>
     </option>
   </component>
@@ -917,7 +930,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.4978678" order="6" side_tool="false" content_ui="tabs" />
@@ -984,25 +997,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/starsnapper/usb/TestPatternUsbController.java</url>
-          <line>127</line>
+          <line>125</line>
           <properties />
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/starsnapper/treatment/TestPatternCameraTest.java</url>
-          <line>23</line>
+          <line>25</line>
           <properties />
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/starsnapper/usb/TestPatternUsbController.java</url>
-          <line>123</line>
+          <line>121</line>
           <properties />
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/starsnapper/usb/TestPatternUsbController.java</url>
-          <line>85</line>
+          <line>83</line>
           <properties />
           <option name="timeStamp" value="66" />
         </line-breakpoint>
@@ -1034,14 +1047,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="70" column="13" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/starsnapper/treatment/RawToFloats.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -1354,23 +1359,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/starsnapper/SnapperDriver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="85" column="104" selection-start-line="85" selection-start-column="104" selection-end-line="85" selection-end-column="104" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/javax/imageio/ImageWriter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="139" column="14" selection-start-line="139" selection-start-column="14" selection-end-line="139" selection-end-column="14" />
           <folding>
-            <element signature="e#4287#4288#0" expanded="true" />
-            <element signature="e#4349#4350#0" expanded="true" />
+            <element signature="e#4287#4288#0" expanded="false" />
+            <element signature="e#4349#4350#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1430,16 +1425,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/starsnapper/treatment/TestPatternCameraTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/starsnapper/treatment/RawToGrayscalePixels.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1454,14 +1439,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/starsnapper/treatment/RawToGrayscalePixelsTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="99" selection-start-line="55" selection-start-column="99" selection-end-line="55" selection-end-column="99" />
           <folding />
         </state>
       </provider>
@@ -1481,7 +1458,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/starsnapper/treatment/GrayscalePgnGeneratorTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.7095652">
           <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
           <folding />
         </state>
@@ -1490,17 +1467,59 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/starsnapper/treatment/GrayscalePngGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <caret line="50" column="45" selection-start-line="50" selection-start-column="45" selection-end-line="50" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/starsnapper/treatment/RawToGrayscalePixelsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="55" column="99" selection-start-line="55" selection-start-column="99" selection-end-line="55" selection-end-column="99" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/starsnapper/usb/TestPatternUsbController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5860869">
-          <caret line="40" column="81" selection-start-line="40" selection-start-column="81" selection-end-line="40" selection-end-column="81" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="24" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2232#2233#0" expanded="true" />
+            <element signature="e#2259#2260#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/starsnapper/treatment/TestPatternCameraTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="66" column="55" selection-start-line="66" selection-start-column="55" selection-end-line="66" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/starsnapper/treatment/RawToFloats.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="90" column="96" selection-start-line="90" selection-start-column="96" selection-end-line="90" selection-end-column="96" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/starsnapper/SnapperDriver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0295652">
+          <caret line="73" column="45" selection-start-line="73" selection-start-column="45" selection-end-line="73" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4182#5369#0" expanded="true" />
+            <element signature="e#5368#5369#0" expanded="true" />
           </folding>
         </state>
       </provider>
