@@ -38,7 +38,7 @@ public class TestPatternUsbController implements IUsbController {
                 int b = (rgb & 0xff);
                 int g = ((rgb >> 8) & 0xff);
                 int r = ((rgb >> 16) & 0xff);
-                int grayscale = ((r * 2126 + g * 7152 + b * 722) / 10000) << 8;
+                int grayscale = ((r * 2126 + g * 7152 + b * 722) * 0x100 / 10000);
                 testPatternPixels[row][col] = grayscale;
             }
         }

@@ -1,7 +1,10 @@
 package starsnapper.treatment;
 
-import ar.com.hjg.pngj.*;
-
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
+import java.awt.image.Raster;
+import java.io.IOException;
 import java.io.OutputStream;
 
 /**
@@ -36,17 +39,18 @@ public class GrayscalePngGenerator {
      * @param stream Stream in which the PNG data will be written
      */
     public void writePixelsToStream(int[] pixels, OutputStream stream) {
-        ImageInfo info = new ImageInfo(this.width, this.height, this.bitsPerPixel, false, true, false);
-        PngWriter pngWriter = new PngWriter(stream, info);
-        
-        for(int row = 0; row < this.height; row++) {
-            int[] lineData = new int[this.width];
-            int lineStart = row * this.width;
-            System.arraycopy(pixels, lineStart, lineData, 0, this.width);
-            ImageLineInt line = new ImageLineInt(info, lineData);
-            pngWriter.writeRow(line);
+        BufferedImage bi = new BufferedImage(this.width, this.height, BufferedImage.TYPE_USHORT_GRAY);
+        Raster raster = bi.getRaster();
+        DataBuffer db = raster.getDataBuffer();
+
+        for(int i = 0; i < pixels.length; i++) {
+            db.setElem(i, pixels[i]);
         }
 
-        pngWriter.close();
+        try {
+            ImageIO.write(bi, "png", stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

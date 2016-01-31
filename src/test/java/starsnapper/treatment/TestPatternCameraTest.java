@@ -22,7 +22,6 @@ public class TestPatternCameraTest {
     @Test
     public void testPatternGeneration() throws IOException, InterruptedException {
         long fullExposureMillis = 1000;
-        long secondFieldDelay = 130;
         MockClock clock = new MockClock();
         IUsbController controller = new TestPatternUsbController(clock, "test_pattern.png", fullExposureMillis);
         ICamera camera = new Camera(controller);
@@ -32,7 +31,8 @@ public class TestPatternCameraTest {
 
         final short width = 800;
         final short height = 300;
-        long exposureTime = 800;
+        long exposureTime = 500;
+        long secondFieldDelay = 250;
 
         // clear the pixels and start the acquiring
         camera.sendCommand(new ClearPixels());

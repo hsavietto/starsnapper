@@ -65,12 +65,6 @@
         </dependency>
 
         <dependency>
-            <groupId>ar.com.hjg</groupId>
-            <artifactId>pngj</artifactId>
-            <version>2.1.0</version>
-        </dependency>
-
-        <dependency>
             <groupId>gov.nasa.gsfc.heasarc</groupId>
             <artifactId>nom-tam-fits</artifactId>
             <version>1.13.1</version>

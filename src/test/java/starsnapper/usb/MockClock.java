@@ -8,6 +8,10 @@ public class MockClock implements IClock {
 
     private long currentTime;
 
+    public MockClock() {
+        this.currentTime = 0;
+    }
+
     @Override
     public long getTime() {
         return this.currentTime;

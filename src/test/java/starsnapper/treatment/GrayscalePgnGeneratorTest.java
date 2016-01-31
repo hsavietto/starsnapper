@@ -5,7 +5,9 @@ import sun.misc.IOUtils;
 import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * @author Helder Savietto (helder.savietto@gmail.com)
