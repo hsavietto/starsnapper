@@ -38,6 +38,7 @@ public class RawToGrayscalePixelsTest {
     @Test
     public void testRawToPixelsInterlaced() throws IOException, ClassNotFoundException {
         byte[][] pixelsInBytes = new byte[2][256 * 128 * 2];
+        double[] normalization = { 1.0, 1.0 };
 
         for(int row = 0; row < 256; row++) {
             int lineStart = (row / 2) * 256 * 2;
@@ -52,7 +53,7 @@ public class RawToGrayscalePixelsTest {
         }
 
         RawToGrayscalePixels converter = new RawToGrayscalePixels(256, 128, 2);
-        int[] pixels = converter.convertRawInterlacedToGrayscalePixels(pixelsInBytes);
+        int[] pixels = converter.convertRawInterlacedToGrayscalePixels(pixelsInBytes, normalization);
         ObjectInputStream referenceStream = new ObjectInputStream(getClass().getClassLoader().getResourceAsStream("reference_pixels.bin"));
         int [] referencePixels = (int[])referenceStream.readObject();
         assertArrayEquals(referencePixels, pixels);

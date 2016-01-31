@@ -3,6 +3,8 @@ package starsnapper;
 import org.apache.commons.cli.*;
 import starsnapper.camera.Camera;
 import starsnapper.commands.*;
+import starsnapper.usb.Clock;
+import starsnapper.usb.IClock;
 import starsnapper.usb.IUsbController;
 import starsnapper.usb.UsbController;
 
@@ -12,7 +14,7 @@ import java.io.*;
  * @author Helder Savietto (helder.savietto@gmail.com)
  * @date 03/09/2015
  */
-public class main {
+public class StarSnapper {
 
     private static void printUsage(
             final String applicationName,
@@ -40,7 +42,7 @@ public class main {
         options.addOption("n", "number", true, "Number of images (0 for infinity, default)");
         options.addOption("o", "output", true, "Output path (current path default)");
         options.addOption("p", "prefix", true, "File name prefix (\"snap\" default)");
-        options.addOption("e", "exposition", true, "Exposition in milliseconds (500 default)");
+        options.addOption("e", "exposure", true, "Exposure time in milliseconds (500 default)");
         options.addOption("c", "closed", true, "Closed shutter time in milliseconds (1500 default)");
         options.addOption("m", "mode", true, "Program mode <snap (default)/focus>");
 
@@ -67,17 +69,18 @@ public class main {
         String outputPathValue = getArgumentValueOrDefault(commandLine, "o", ".");
         final File outputPath = new File(outputPathValue);
         final String fileNamePrefix = getArgumentValueOrDefault(commandLine, "p", "snap");
-        int expositionTime = Integer.parseInt(getArgumentValueOrDefault(commandLine, "e", "500"));
+        int exposureTime = Integer.parseInt(getArgumentValueOrDefault(commandLine, "e", "500"));
         int closedTime = Integer.parseInt(getArgumentValueOrDefault(commandLine, "c", "1500"));
 
         IUsbController controller = new UsbController();
+        IClock clock = new Clock();
         Camera camera = new Camera(controller);
         camera.initCommunications();
         camera.sendCommand(new Reset());
 
         SnapperDriver driver = new SnapperDriver(
-                camera, fits, png, numberOfImages, outputPath,
-                fileNamePrefix, expositionTime, closedTime);
+                camera, clock, fits, png, numberOfImages, outputPath,
+                fileNamePrefix, exposureTime, closedTime);
 
         driver.captureFrames(System.out);
 

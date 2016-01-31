@@ -65,9 +65,10 @@ public class RawToGrayscalePixels {
      * Converts the interlaced raw data into pixel values.
      *
      * @param raw the raw data from the camera
+     * @param normalization normalization of the fields
      * @return an array with the pixel values
      */
-    public int[] convertRawInterlacedToGrayscalePixels(byte[][] raw) {
+    public int[] convertRawInterlacedToGrayscalePixels(byte[][] raw, double[] normalization) {
         int numberOfFields = raw.length;
         int[] pixels = new int[this.width * this.height * numberOfFields];
         ByteBuffer bb = ByteBuffer.allocate(4);
@@ -89,7 +90,7 @@ public class RawToGrayscalePixels {
                     bb.put((byte) 0);
                 }
 
-                pixels[targetStart + column] = bb.getInt(0);
+                pixels[targetStart + column] = (int)((double)bb.getInt(0) * normalization[field]);
             }
         }
 

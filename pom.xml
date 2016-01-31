@@ -15,7 +15,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>starsnapper.main</mainClass>
+                            <mainClass>starsnapper.StarSnapper</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

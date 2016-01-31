@@ -6,6 +6,7 @@ import starsnapper.camera.ICamera;
 import starsnapper.commands.*;
 import starsnapper.treatment.PngSaver;
 import starsnapper.treatment.RawToFloats;
+import starsnapper.usb.IClock;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -18,24 +19,26 @@ import java.util.Date;
 public class SnapperDriver {
 
     private final ICamera camera;
+    private final IClock clock;
     private final boolean fits;
     private final boolean png;
     private final int numberOfImages;
     private final File outputPath;
     private final String fileNamePrefix;
-    private final int expositionTime;
+    private final int exposureTime;
     private final int closedShutterTime;
 
     public SnapperDriver(
-            ICamera camera, boolean fits, boolean png, int numberOfImages, File outputPath,
-            String fileNamePrefix, int expositionTime, int closedShutterTime) {
+            ICamera camera, IClock clock, boolean fits, boolean png, int numberOfImages,
+            File outputPath, String fileNamePrefix, int exposureTime, int closedShutterTime) {
         this.camera = camera;
+        this.clock = clock;
         this.fits = fits;
         this.png = png;
         this.numberOfImages = numberOfImages;
         this.outputPath = outputPath;
         this.fileNamePrefix = fileNamePrefix;
-        this.expositionTime = expositionTime;
+        this.exposureTime = exposureTime;
         this.closedShutterTime = closedShutterTime;
     }
 
@@ -52,26 +55,27 @@ public class SnapperDriver {
         while(imageIndex != numberOfImages) {
             // clear the pixels and start the acquiring
             camera.sendCommand(new ClearPixels());
-            long startCapture = System.currentTimeMillis();
-            Thread.sleep(expositionTime);
-            long endCapture = System.currentTimeMillis();
+            long startCapture = clock.getTime();
+            Thread.sleep(exposureTime);
+            long endCapture = clock.getTime();
 
             // obtain even field
             ReadPixels readEvenFieldCommand = new ReadPixels(width, height);
             readEvenFieldCommand.setFlag(CommandFlags.CCD_FLAGS_FIELD_EVEN);
             ReadPixelsReply readEvenReply = new ReadPixelsReply();
             readEvenReply.setData(camera.sendCommand(readEvenFieldCommand));
-            long elapsedEvenField = System.currentTimeMillis() - startCapture;
+            long elapsedEvenField = clock.getTime() - startCapture;
 
             // obtain odd field
             ReadPixels readOddFieldCommand = new ReadPixels(width, height);
             readOddFieldCommand.setFlag(CommandFlags.CCD_FLAGS_FIELD_ODD);
             ReadPixelsReply readOddReply = new ReadPixelsReply();
             readOddReply.setData(camera.sendCommand(readOddFieldCommand));
-            long elapsedOddField = System.currentTimeMillis() - startCapture;
+            long elapsedOddField = clock.getTime() - startCapture;
             final double exposureTime = ((double)elapsedOddField + (double)elapsedEvenField) / 2000.0;
 
             final byte[][] rawData = new byte[][] { readEvenReply.getRawImage(), readOddReply.getRawImage() };
+            final double[] normalization = { 1.0, 1.0 };
             final int counter = imageIndex;
 
             if(png) {
@@ -79,7 +83,7 @@ public class SnapperDriver {
                 printOut.println("Saving " + fileName + "...");
                 File file = new File(outputPath, fileName);
                 OutputStream out = new FileOutputStream(file);
-                Thread pngSavingThread = new Thread(new PngSaver(width, height, rawData, out));
+                Thread pngSavingThread = new Thread(new PngSaver(width, height, rawData, normalization, out));
                 pngSavingThread.start();
             }
 
@@ -116,7 +120,7 @@ public class SnapperDriver {
             }
 
             imageIndex++;
-            Thread.sleep(closedShutterTime - (System.currentTimeMillis() - endCapture));
+            Thread.sleep(closedShutterTime - (clock.getTime() - endCapture));
         }
     }
 }
