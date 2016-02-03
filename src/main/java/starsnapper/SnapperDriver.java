@@ -101,11 +101,11 @@ public class SnapperDriver {
                             RawToFloats floatsGenerator = new RawToFloats(width, height, 2);
                             float[][] data = floatsGenerator.convertRawInterlacedToFloats(rawData, normalization);
                             Fits fitsFile = new Fits();
-                            BasicHDU<?> dataHUD = FitsFactory.hduFactory(data);
-                            Header header = dataHUD.getHeader();
+                            BasicHDU<?> dataHDU = FitsFactory.hduFactory(data);
+                            Header header = dataHDU.getHeader();
                             header.addValue("EXPOSURE", exposureTime, "Exposure time (s)");
                             header.addValue("DATE-END", dateEnd, "Observation timestamp");
-                            fitsFile.addHDU(dataHUD);
+                            fitsFile.addHDU(dataHDU);
                             File file = new File(outputPath, fileName);
                             BufferedFile bufferedFile = new BufferedFile(file, "rw");
                             fitsFile.write(bufferedFile);

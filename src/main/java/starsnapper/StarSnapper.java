@@ -44,7 +44,6 @@ public class StarSnapper {
         options.addOption("p", "prefix", true, "File name prefix (\"snap\" default)");
         options.addOption("e", "exposure", true, "Exposure time in milliseconds (500 default)");
         options.addOption("c", "closed", true, "Closed shutter time in milliseconds (1500 default)");
-        options.addOption("m", "mode", true, "Program mode <snap (default)/focus>");
 
         CommandLineParser parser = new PosixParser();
         CommandLine commandLine = parser.parse(options, args);
