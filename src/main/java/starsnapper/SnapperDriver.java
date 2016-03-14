@@ -5,7 +5,7 @@ import nom.tam.util.BufferedFile;
 import starsnapper.camera.ICamera;
 import starsnapper.commands.*;
 import starsnapper.treatment.PngSaver;
-import starsnapper.treatment.RawToFloats;
+import starsnapper.treatment.RawToShorts;
 import starsnapper.usb.IClock;
 
 import java.io.*;
@@ -72,11 +72,14 @@ public class SnapperDriver {
             ReadPixelsReply readOddReply = new ReadPixelsReply();
             readOddReply.setData(camera.sendCommand(readOddFieldCommand));
             long elapsedOddField = clock.getTime() - startCapture;
-            final double exposureTime = (double)elapsedOddField / 1000.0;
+
+            printOut.println("elapsedEvenField=" + elapsedEvenField);
+            printOut.println("elapsedOddField=" + elapsedOddField);
 
             final byte[][] rawData = new byte[][] { readEvenReply.getRawImage(), readOddReply.getRawImage() };
-            final double[] normalization = { 1.0, (double)elapsedOddField / (double)elapsedEvenField };
+            final double[] normalization = { 1.0, (double)exposureTime / (double)elapsedEvenField };
             final int counter = imageIndex;
+            final double timmedExposure = (double)elapsedEvenField / 1000.0;
 
             if(png) {
                 final String fileName = fileNamePrefix + "_" + counter + ".png";
@@ -98,12 +101,12 @@ public class SnapperDriver {
                 Thread fitsSavingThread = new Thread(new Runnable() {
                     public void run() {
                         try {
-                            RawToFloats floatsGenerator = new RawToFloats(width, height, 2);
-                            float[][] data = floatsGenerator.convertRawInterlacedToFloats(rawData, normalization);
+                            RawToShorts shortsGenerator = new RawToShorts(width, height, 2);
+                            short[][] data = shortsGenerator.convertRawInterlacedToShorts(rawData, normalization);
                             Fits fitsFile = new Fits();
                             BasicHDU<?> dataHDU = FitsFactory.hduFactory(data);
                             Header header = dataHDU.getHeader();
-                            header.addValue("EXPOSURE", exposureTime, "Exposure time (s)");
+                            header.addValue("EXPOSURE", timmedExposure, "Exposure time (s)");
                             header.addValue("DATE-END", dateEnd, "Observation timestamp");
                             fitsFile.addHDU(dataHDU);
                             File file = new File(outputPath, fileName);

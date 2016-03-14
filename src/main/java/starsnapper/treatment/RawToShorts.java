@@ -57,7 +57,7 @@ public class RawToShorts {
                     }
 
                     int normalized = (int)((double)bb.getInt(0) * normalization[field]);
-                    pixels[row * numberOfFields + field][column] = (short)(normalized & 0xffff);
+                    pixels[row * numberOfFields + field][column] = (short)normalized;
                 }
             }
         }

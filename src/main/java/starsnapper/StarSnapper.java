@@ -68,14 +68,12 @@ public class StarSnapper {
         String outputPathValue = getArgumentValueOrDefault(commandLine, "o", ".");
         final File outputPath = new File(outputPathValue);
         final String fileNamePrefix = getArgumentValueOrDefault(commandLine, "p", "snap");
-        int exposureTime = Integer.parseInt(getArgumentValueOrDefault(commandLine, "e", "500"));
+        int exposureTime = Integer.parseInt(getArgumentValueOrDefault(commandLine, "e", "250"));
         int closedTime = Integer.parseInt(getArgumentValueOrDefault(commandLine, "c", "1500"));
 
         IUsbController controller = new UsbController();
         IClock clock = new Clock();
         Camera camera = new Camera(controller);
-        camera.initCommunications();
-        camera.sendCommand(new Reset());
 
         SnapperDriver driver = new SnapperDriver(
                 camera, clock, fits, png, numberOfImages, outputPath,
